@@ -23,30 +23,6 @@ class StandardTagTest < Test::Unit::TestCase
     assert_template_result(text,text)
   end
 
-  def test_has_a_block_which_does_nothing
-    assert_template_result(%|the comment block should be removed  .. right?|,
-                           %|the comment block should be removed {%comment%} be gone.. {%endcomment%} .. right?|)
-
-    assert_template_result('','{%comment%}{%endcomment%}')
-    assert_template_result('','{%comment%}{% endcomment %}')
-    assert_template_result('','{% comment %}{%endcomment%}')
-    assert_template_result('','{% comment %}{% endcomment %}')
-    assert_template_result('','{%comment%}comment{%endcomment%}')
-    assert_template_result('','{% comment %}comment{% endcomment %}')
-
-    assert_template_result('foobar','foo{%comment%}comment{%endcomment%}bar')
-    assert_template_result('foobar','foo{% comment %}comment{% endcomment %}bar')
-    assert_template_result('foobar','foo{%comment%} comment {%endcomment%}bar')
-    assert_template_result('foobar','foo{% comment %} comment {% endcomment %}bar')
-
-    assert_template_result('foo  bar','foo {%comment%} {%endcomment%} bar')
-    assert_template_result('foo  bar','foo {%comment%}comment{%endcomment%} bar')
-    assert_template_result('foo  bar','foo {%comment%} comment {%endcomment%} bar')
-
-    assert_template_result('foobar','foo{%comment%}
-                                     {%endcomment%}bar')
-  end
-
   def test_for
     assert_template_result(' yo  yo  yo  yo ','{%for item in array%} yo {%endfor%}','array' => [1,2,3,4])
     assert_template_result('yoyo','{%for item in array%}yo{%endfor%}','array' => [1,2])
