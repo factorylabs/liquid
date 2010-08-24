@@ -1,4 +1,4 @@
-require 'cgi'
+autoload :CGI, 'cgi'
 
 module Liquid
 
