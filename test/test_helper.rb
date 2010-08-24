@@ -8,7 +8,7 @@ require 'test/unit/assertions'
 require 'caller'
 require 'breakpoint'
 require 'ruby-debug'
-require File.join File.dirname(__FILE__), '..', 'lib', 'liquid'
+require File.join File.dirname(__FILE__), '..', 'init'
 
 
 module Test

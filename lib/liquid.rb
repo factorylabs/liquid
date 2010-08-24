@@ -19,8 +19,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'liquid/core_ext'
+require 'lib/liquid/core_ext'
 
 module Liquid
   FilterSeparator             = /\|/
@@ -51,6 +50,7 @@ module Liquid
 
   # Internal Liquid classes
   autoload :Behavior,         'lib/liquid/behavior'
+  autoload :Filters,          'lib/liquid/filters'
   autoload :Document,         'lib/liquid/document'
   autoload :Tag,              'lib/liquid/tag'
   autoload :Drop,             'lib/liquid/drop'
@@ -59,7 +59,6 @@ module Liquid
   autoload :Variable,         'lib/liquid/variable'
   autoload :FileSystem,       'lib/liquid/file_system'
   autoload :Template,         'lib/liquid/template'
-  autoload :StandardFilters,  'lib/liquid/standardfilters'
   autoload :Condition,        'lib/liquid/condition'
 
   # Liquid Errors

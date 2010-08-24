@@ -1,5 +1,3 @@
-autoload :Date, 'date'
-
 class Date  # :nodoc:
   def to_liquid
     self

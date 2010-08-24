@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class Filters
-  include Liquid::StandardFilters
+class FiltersTester
+  include Liquid::Filters::StandardFilters
 end
 
 class StandardFiltersTest < Test::Unit::TestCase
   include Liquid
 
   def setup
-    @filters = Filters.new
+    @filters = FiltersTester.new
   end
 
   def test_size
@@ -98,7 +98,6 @@ class StandardFiltersTest < Test::Unit::TestCase
 
     assert_equal nil, @filters.date(nil, "%B")
   end
-
 
   def test_first_last
     assert_equal 1, @filters.first([1,2,3])
