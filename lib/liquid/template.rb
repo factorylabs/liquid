@@ -14,8 +14,10 @@ module Liquid
   #   template.render('user_name' => 'bob')
   #
   class Template
+    include FileSystem
+
     attr_accessor :root
-    @@file_system = BlankFileSystem.new
+    @@file_system = Liquid::FileSystem::Blank.new
 
     class << self
       def file_system
@@ -28,6 +30,11 @@ module Liquid
 
       def register_tag(name, klass)
         tags[name.to_s] = klass
+      end
+
+      def register_tags(tags = {})
+        debugger
+        tags.each { |tag, klass| self.register_tag(tag, klass) }
       end
 
       def tags
@@ -55,7 +62,7 @@ module Liquid
     # Parse source code.
     # Returns self for easy chaining
     def parse(source)
-      @root = Document.new(tokenize(Liquid::Literal.from_shorthand(source)))
+      @root = Liquid::Tag::Document.new(tokenize(Liquid::Tag::Literal.from_shorthand(source)))
       self
     end
 

@@ -71,4 +71,22 @@ class TemplateTest < Test::Unit::TestCase
     assert_equal '1', t.render(assigns)
     @global = nil
   end
+
+  def test_register_tag
+    Template.register_tag :myliteral, Liquid::Tag::Literal
+
+    assert Template.tags.include?('myliteral')
+  ensure
+    Template.tags.delete 'myliteral'
+  end
+
+  def test_register_tags
+    Template.register_tags({:myliteral => Liquid::Tag::Literal, :mycomment => Liquid::Tag::Comment})
+
+    assert_include Template.tags.include?('myliteral')
+    assert_include Template.tags.include?('mycomment')
+  ensure
+    Template.tags.delete 'myliteral'
+    Template.tags.delete 'mycomment'
+  end
 end # TemplateTest

@@ -1,42 +1,47 @@
 module Liquid
 
-  class Literal < Block
+  module Tag
 
-    # Class methods
+    class Literal < Block
 
-    # Converts a shorthand Liquid literal into its long representation.
-    #
-    # Currently the Template parser only knows how to handle the long version.
-    # So, it always checks if it is in the presence of a literal, in which case it gets converted through this method.
-    #
-    # Example:
-    #   Liquid::Literal "{{{ hello world }}}" #=> "{% literal %} hello world {% endliteral %}"
-    def self.from_shorthand(literal)
-      literal =~ LiteralShorthand ? "{% literal %}#{$1}{% endliteral %}" : literal
-    end
+      # Class methods
 
-    # Public instance methods
-
-    def parse(tokens) # :nodoc:
-      @nodelist ||= []
-      @nodelist.clear
-
-      while token = tokens.shift
-        if token =~ FullToken && block_delimiter == $1
-          end_tag
-          return
-        else
-          @nodelist << token
-        end
+      # Converts a shorthand Liquid literal into its long representation.
+      #
+      # Currently the Template parser only knows how to handle the long version.
+      # So, it always checks if it is in the presence of a literal, in which case it gets converted through this method.
+      #
+      # Example:
+      #   Liquid::Literal "{{{ hello world }}}" #=> "{% literal %} hello world {% endliteral %}"
+      def self.from_shorthand(literal)
+        literal =~ LiteralShorthand ? "{% literal %}#{$1}{% endliteral %}" : literal
       end
 
-      # Make sure that its ok to end parsing in the current block.
-      # Effectively this method will throw and exception unless the current block is
-      # of type Document
-      assert_missing_delimitation!
-    end # parse
+      # Public instance methods
 
-  end
+      def parse(tokens) # :nodoc:
 
-  Template.register_tag('literal', Literal)
-end
+        @nodelist ||= []
+        @nodelist.clear
+
+        while token = tokens.shift
+          if token =~ FullToken && block_delimiter == $1
+            end_tag
+            return
+          else
+            @nodelist << token
+          end
+        end
+
+        # Make sure that its ok to end parsing in the current block.
+        # Effectively this method will throw and exception unless the current block is
+        # of type Document
+        assert_missing_delimitation!
+
+      end # parse
+
+    end # Literal
+
+  end # Tag
+
+end # Liquid

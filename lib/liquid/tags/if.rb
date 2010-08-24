@@ -1,79 +1,82 @@
 module Liquid
 
-  # If is the conditional block
-  #
-  #   {% if user.admin %}
-  #     Admin user!
-  #   {% else %}
-  #     Not admin user
-  #   {% endif %}
-  #
-  #    There are {% if count < 5 %} less {% else %} more {% endif %} items than you need.
-  #
-  #
-  class If < Block
-    SyntaxHelp = "Syntax Error in tag 'if' - Valid syntax: if [expression]"
-    Syntax = /(#{QuotedFragment})\s*([=!<>a-z_]+)?\s*(#{QuotedFragment})?/
-    ExpressionsAndOperators = /(?:\b(?:\s?and\s?|\s?or\s?)\b|(?:\s*(?!\b(?:\s?and\s?|\s?or\s?)\b)(?:#{QuotedFragment}|\S+)\s*)+)/
+  module Tag
 
-    def initialize(tag_name, markup, tokens)
-      @blocks = []
+    # If is the conditional block
+    #
+    #   {% if user.admin %}
+    #     Admin user!
+    #   {% else %}
+    #     Not admin user
+    #   {% endif %}
+    #
+    #    There are {% if count < 5 %} less {% else %} more {% endif %} items than you need.
+    #
+    #
+    class If < Block
 
-      push_block('if', markup)
+      SyntaxHelp = "Syntax Error in tag 'if' - Valid syntax: if [expression]"
+      Syntax = /(#{QuotedFragment})\s*([=!<>a-z_]+)?\s*(#{QuotedFragment})?/
+      ExpressionsAndOperators = /(?:\b(?:\s?and\s?|\s?or\s?)\b|(?:\s*(?!\b(?:\s?and\s?|\s?or\s?)\b)(?:#{QuotedFragment}|\S+)\s*)+)/
 
-      super
-    end
+      def initialize(tag_name, markup, tokens)
+        @blocks = []
 
-    def unknown_tag(tag, markup, tokens)
-      if ['elsif', 'else'].include?(tag)
-        push_block(tag, markup)
-      else
+        push_block('if', markup)
+
         super
       end
-    end
 
-    def render(context)
-      context.stack do
-        @blocks.each do |block|
-          if block.evaluate(context)
-            return render_all(block.attachment, context)
-          end
-        end
-        ''
-      end
-    end
-
-    private
-
-      def push_block(tag, markup)
-        block = if tag == 'else'
-          ElseCondition.new
+      def unknown_tag(tag, markup, tokens)
+        if ['elsif', 'else'].include?(tag)
+          push_block(tag, markup)
         else
-
-          expressions = markup.scan(ExpressionsAndOperators).reverse
-          raise(SyntaxError, SyntaxHelp) unless expressions.shift =~ Syntax
-
-          condition = Condition.new($1, $2, $3)
-
-          while not expressions.empty?
-            operator = (expressions.shift).to_s.strip
-
-            raise(SyntaxError, SyntaxHelp) unless expressions.shift.to_s =~ Syntax
-
-            new_condition = Condition.new($1, $2, $3)
-            new_condition.send(operator.to_sym, condition)
-            condition = new_condition
-          end
-
-          condition
+          super
         end
-
-        @blocks.push(block)
-        @nodelist = block.attach(Array.new)
       end
 
+      def render(context)
+        context.stack do
+          @blocks.each do |block|
+            if block.evaluate(context)
+              return render_all(block.attachment, context)
+            end
+          end
+          ''
+        end
+      end
 
-  end
+      private
 
-  Template.register_tag('if', If)
-end
+        def push_block(tag, markup)
+          block = if tag == 'else'
+            ElseCondition.new
+          else
+
+            expressions = markup.scan(ExpressionsAndOperators).reverse
+            raise(SyntaxError, SyntaxHelp) unless expressions.shift =~ Syntax
+
+            condition = Condition.new($1, $2, $3)
+
+            while not expressions.empty?
+              operator = (expressions.shift).to_s.strip
+
+              raise(SyntaxError, SyntaxHelp) unless expressions.shift.to_s =~ Syntax
+
+              new_condition = Condition.new($1, $2, $3)
+              new_condition.send(operator.to_sym, condition)
+              condition = new_condition
+            end
+
+            condition
+          end
+
+          @blocks.push(block)
+          @nodelist = block.attach(Array.new)
+        end # push_block
+
+    end # If
+
+  end # Tag
+
+end # Liquid

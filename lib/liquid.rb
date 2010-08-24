@@ -20,6 +20,8 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+require 'liquid/extensions'
+require 'liquid/module_ex'
 
 module Liquid
   FilterSeparator             = /\|/
@@ -46,24 +48,33 @@ module Liquid
   TemplateParser              = /(#{PartialTemplateParser}|#{AnyStartingTag})/
   VariableParser              = /\[[^\]]+\]|#{VariableSegment}+\??/
   LiteralShorthand            = /^(?:\{\{\{\s?)(.*?)(?:\s*\}\}\})$/
+
+  # Internal Liquid classes
+  autoload :Tag,              'lib/liquid/tag'
+  autoload :Drop,             'lib/liquid/drop'
+  autoload :Strainer,         'lib/liquid/strainer'
+  autoload :Context,          'lib/liquid/context'
+  autoload :Variable,         'lib/liquid/variable'
+  autoload :FileSystem,       'lib/liquid/file_system'
+  autoload :Template,         'lib/liquid/template'
+  autoload :StandardFilters,  'lib/liquid/standardfilters'
+  autoload :Condition,        'lib/liquid/condition'
+
+  # Liquid Errors
+  class LiquidError < ::StandardError #:nodoc:
+  end
+  class ArgumentError < LiquidError #:nodoc:
+  end
+  class ContextError < LiquidError #:nodoc:
+  end
+  class FilterNotFound < LiquidError #:nodoc:
+  end
+  class FileSystemError < LiquidError #:nodoc:
+  end
+  class StandardError < LiquidError #:nodoc:
+  end
+  class SyntaxError < LiquidError #:nodoc:
+  end
+  class StackLevelError < LiquidError #:nodoc:
+  end
 end
-
-require 'liquid/drop'
-require 'liquid/extensions'
-require 'liquid/errors'
-require 'liquid/strainer'
-require 'liquid/context'
-require 'liquid/tag'
-require 'liquid/block'
-require 'liquid/document'
-require 'liquid/variable'
-require 'liquid/file_system'
-require 'liquid/template'
-require 'liquid/htmltags'
-require 'liquid/standardfilters'
-require 'liquid/condition'
-require 'liquid/module_ex'
-
-# Load all the tags of the standard library
-#
-Dir[File.dirname(__FILE__) + '/liquid/tags/*.rb'].each { |f| require f }
