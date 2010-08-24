@@ -2,7 +2,7 @@ module Liquid
 
   module Tag
 
-    class Case
+    class Case < Base
       include Liquid::Behavior::Block
 
       Syntax     = /(#{QuotedFragment})/

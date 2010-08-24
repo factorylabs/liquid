@@ -2,7 +2,7 @@ module Liquid
 
   module Tag
 
-    class Comment
+    class Comment < Base
       include Liquid::Behavior::Block
 
       # Class methods

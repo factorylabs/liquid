@@ -13,7 +13,7 @@ module Liquid
     #    There are {% if count < 5 %} less {% else %} more {% endif %} items than you need.
     #
     #
-    class If
+    class If < Base
       include Liquid::Behavior::Block
 
       SyntaxHelp = "Syntax Error in tag 'if' - Valid syntax: if [expression]"

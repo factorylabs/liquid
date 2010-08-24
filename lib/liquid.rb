@@ -20,8 +20,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'liquid/extensions'
-require 'liquid/module_ex'
+require 'liquid/core_ext'
 
 module Liquid
   FilterSeparator             = /\|/

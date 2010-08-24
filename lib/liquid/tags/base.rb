@@ -2,7 +2,8 @@ module Liquid
 
   module Tag # :nodoc:
 
-    class Base # :nodoc:
+    # All tags in Liquid extend Liquid::Tag::Base
+    class Base
 
       attr_accessor :nodelist
 
