@@ -13,14 +13,13 @@ module Liquid
       #
       # Example:
       #   Liquid::Literal "{{{ hello world }}}" #=> "{% literal %} hello world {% endliteral %}"
-      def self.from_shorthand(literal)
-        literal =~ LiteralShorthand ? "{% literal %}#{$1}{% endliteral %}" : literal
+      def self.from_shorthand(source)
+        source =~ LiteralShorthand ? "{% literal %}#{$1}{% endliteral %}" : source
       end
 
       # Public instance methods
 
       def parse(tokens) # :nodoc:
-
         @nodelist ||= []
         @nodelist.clear
 
@@ -37,7 +36,6 @@ module Liquid
         # Effectively this method will throw and exception unless the current block is
         # of type Document
         assert_missing_delimitation!
-
       end # parse
 
     end # Literal

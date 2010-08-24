@@ -48,6 +48,7 @@ module Liquid
   TemplateParser              = /(#{PartialTemplateParser}|#{AnyStartingTag})/
   VariableParser              = /\[[^\]]+\]|#{VariableSegment}+\??/
   LiteralShorthand            = /^(?:\{\{\{\s?)(.*?)(?:\s*\}\}\})$/
+  CommentShorthand            = /^(?:\{\s?\#\s?)(.*?)(?:\s*\#\s?\})$/
 
   # Internal Liquid classes
   autoload :Tag,              'lib/liquid/tag'

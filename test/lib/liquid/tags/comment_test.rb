@@ -28,7 +28,13 @@ class CommentTagTest < Test::Unit::TestCase
   end
 
   def test_comment_shorthand_syntax
-    assert_template_result('', '{* fire za missiles! *}')
+    ['{# fire za missiles! #}', '{ #comment# }', '{ # comment # }'].each { |t| assert_template_result('', t) }
+  end
+
+  # Class methods
+  def test_from_shorthand
+    assert_equal "{% comment %}{{{ {% if '1' == '1'}y{% endif %} }}}{% endcomment %}",
+    Liquid::Tag::Comment.from_shorthand("{# {{{ {% if '1' == '1'}y{% endif %} }}} #}")
   end
 
 end # CommentTagTest

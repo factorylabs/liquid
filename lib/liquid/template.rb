@@ -68,7 +68,11 @@ module Liquid
     # Parse source code.
     # Returns self for easy chaining
     def parse(source)
-      @root = Liquid::Tag::Document.new(tokenize(Liquid::Tag::Literal.from_shorthand(source)))
+      # TODO: Move into a pre-processor
+      source = Liquid::Tag::Literal.from_shorthand(source)
+      source = Liquid::Tag::Comment.from_shorthand(source)
+
+      @root = Liquid::Tag::Document.new tokenize(source)
       self
     end
 
