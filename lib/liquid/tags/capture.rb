@@ -13,7 +13,8 @@ module Liquid
     # Capture is useful for saving content for use later in your template, such as
     # in a sidebar or footer.
     #
-    class Capture < Block
+    class Capture
+      include Liquid::BlockBehavior
 
       Syntax = /(\w+)/
 

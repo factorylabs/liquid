@@ -72,7 +72,7 @@ module Liquid
       source = Liquid::Tag::Literal.from_shorthand(source)
       source = Liquid::Tag::Comment.from_shorthand(source)
 
-      @root = Liquid::Tag::Document.new tokenize(source)
+      @root = Liquid::Document.new tokenize(source)
       self
     end
 

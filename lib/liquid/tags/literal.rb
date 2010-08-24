@@ -2,7 +2,8 @@ module Liquid
 
   module Tag
 
-    class Literal < Block
+    class Literal
+      include Liquid::BlockBehavior
 
       # Class methods
 

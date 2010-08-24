@@ -1,8 +1,7 @@
 module Liquid
 
-  module Tag
-
-    class Document < Block
+    class Document
+      include Liquid::BlockBehavior
 
       # we don't need markup to open this block
       def initialize(tokens)
@@ -18,7 +17,5 @@ module Liquid
       def assert_missing_delimitation!
       end
     end # Document
-
-  end # Tag
 
 end # Liquid

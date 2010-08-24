@@ -13,7 +13,8 @@ module Liquid
     #    There are {% if count < 5 %} less {% else %} more {% endif %} items than you need.
     #
     #
-    class If < Block
+    class If
+      include Liquid::BlockBehavior
 
       SyntaxHelp = "Syntax Error in tag 'if' - Valid syntax: if [expression]"
       Syntax = /(#{QuotedFragment})\s*([=!<>a-z_]+)?\s*(#{QuotedFragment})?/

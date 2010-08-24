@@ -44,11 +44,9 @@ class VariableTest < Test::Unit::TestCase
   end
 
   def test_with_custom_tag
-    Liquid::Template.register_tag("testtag", Liquid::Tag::Block)
+    Liquid::Template.register_tag("testtag", Liquid::Tag::Literal)
 
-    assert_nothing_thrown do
-      template = Liquid::Template.parse( "{% testtag %} {% endtesttag %}")
-    end
+    assert_nothing_thrown { Liquid::Template.parse "{% testtag %} {% endtesttag %}" }
   end
 
   private

@@ -2,7 +2,8 @@ module Liquid
 
   module Tag
 
-  	class Comment < Block
+    class Comment
+      include Liquid::BlockBehavior
 
       # Class methods
       def self.from_shorthand(source)

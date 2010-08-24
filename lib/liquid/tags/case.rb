@@ -2,7 +2,8 @@ module Liquid
 
   module Tag
 
-    class Case < Block
+    class Case
+      include Liquid::BlockBehavior
 
       Syntax     = /(#{QuotedFragment})/
       WhenSyntax = /(#{QuotedFragment})(?:(?:\s+or\s+|\s*\,\s*)(#{QuotedFragment}.*))?/
