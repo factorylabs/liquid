@@ -3,7 +3,7 @@ module Liquid
   module Tag
 
     class Ifchanged
-      include Liquid::BlockBehavior
+      include Liquid::Behavior::Block
 
       def render(context)
 

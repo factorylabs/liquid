@@ -14,7 +14,7 @@ module Liquid
     # in a sidebar or footer.
     #
     class Capture
-      include Liquid::BlockBehavior
+      include Liquid::Behavior::Block
 
       Syntax = /(\w+)/
 

@@ -44,7 +44,7 @@ module Liquid
     # forloop.last:: Returns true if the item is the last item.
     #
     class For
-      include Liquid::BlockBehavior
+      include Liquid::Behavior::Block
 
       Syntax = /(\w+)\s+in\s+(#{QuotedFragment}+)\s*(reversed)?/
 

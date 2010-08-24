@@ -51,7 +51,7 @@ module Liquid
   CommentShorthand            = /^(?:\{\s?\#\s?)(.*?)(?:\s*\#\s?\})$/
 
   # Internal Liquid classes
-  autoload :BlockBehavior,    'lib/liquid/block_behavior'
+  autoload :Behavior,         'lib/liquid/behavior'
   autoload :Document,         'lib/liquid/document'
   autoload :Tag,              'lib/liquid/tag'
   autoload :Drop,             'lib/liquid/drop'

@@ -14,7 +14,7 @@ module Liquid
     #
     #
     class If
-      include Liquid::BlockBehavior
+      include Liquid::Behavior::Block
 
       SyntaxHelp = "Syntax Error in tag 'if' - Valid syntax: if [expression]"
       Syntax = /(#{QuotedFragment})\s*([=!<>a-z_]+)?\s*(#{QuotedFragment})?/

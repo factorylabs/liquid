@@ -3,7 +3,7 @@ module Liquid
   module Tag
 
     class TableRow
-      include Liquid::BlockBehavior
+      include Liquid::Behavior::Block
 
       Syntax = /(\w+)\s+in\s+(#{VariableSignature}+)/
 

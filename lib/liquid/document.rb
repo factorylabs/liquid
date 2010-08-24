@@ -1,7 +1,7 @@
 module Liquid
 
     class Document
-      include Liquid::BlockBehavior
+      include Liquid::Behavior::Block
 
       # we don't need markup to open this block
       def initialize(tokens)
