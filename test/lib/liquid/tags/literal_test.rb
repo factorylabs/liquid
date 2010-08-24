@@ -29,11 +29,11 @@ class LiteralTagTest < Test::Unit::TestCase
 
   # Class methods
   def test_from_shorthand
-    assert_equal '{% literal %}gnomeslab{% endliteral %}', Liquid::Literal.from_shorthand('{{{gnomeslab}}}')
+    assert_equal '{% literal %}gnomeslab{% endliteral %}', Liquid::Tag::Literal.from_shorthand('{{{gnomeslab}}}')
   end
 
   def test_from_shorthand_ignores_improper_syntax
     text = "{% if 'hi' == 'hi' %}hi{% endif %}"
-    assert_equal text, Liquid::Literal.from_shorthand(text)
+    assert_equal text, Liquid::Tag::Literal.from_shorthand(text)
   end
 end # AssignTest

@@ -32,13 +32,19 @@ module Liquid
         tags[name.to_s] = klass
       end
 
-      def register_tags(tags = {})
-        debugger
-        tags.each { |tag, klass| self.register_tag(tag, klass) }
-      end
-
       def tags
-        @tags ||= {}
+        @tags ||= { 'assign'     => Liquid::Tag::Assign,
+                    'capture'    => Liquid::Tag::Capture,
+                    'case'       => Liquid::Tag::Case,
+                    'comment'    => Liquid::Tag::Comment,
+                    'cycle'      => Liquid::Tag::Cycle,
+                    'for'        => Liquid::Tag::For,
+                    'if'         => Liquid::Tag::If,
+                    'ifchanged'  => Liquid::Tag::Ifchanged,
+                    'include'    => Liquid::Tag::Include,
+                    'literal'    => Liquid::Tag::Literal,
+                    'tablerow'   => Liquid::Tag::TableRow,
+                    'unless'     => Liquid::Tag::Unless }
       end
 
       # Pass a module with filter methods which should be available
@@ -95,7 +101,7 @@ module Liquid
     #
     def render(*args)
       return '' if @root.nil?
-      
+
       context = case args.first
       when Liquid::Context
         args.shift
@@ -140,17 +146,17 @@ module Liquid
 
     private
 
-    # Uses the <tt>Liquid::TemplateParser</tt> regexp to tokenize the passed source
-    def tokenize(source)
-      source = source.source if source.respond_to?(:source)
-      return [] if source.to_s.empty?
-      tokens = source.split(TemplateParser)
+      # Uses the <tt>Liquid::TemplateParser</tt> regexp to tokenize the passed source
+      def tokenize(source)
+        source = source.source if source.respond_to?(:source)
+        return [] if source.to_s.empty?
+        tokens = source.split(TemplateParser)
 
-      # removes the rogue empty element at the beginning of the array
-      tokens.shift if tokens[0] and tokens[0].empty?
+        # removes the rogue empty element at the beginning of the array
+        tokens.shift if tokens[0] and tokens[0].empty?
 
-      tokens
-    end
+        tokens
+      end
 
   end
 end

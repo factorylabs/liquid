@@ -2,7 +2,7 @@ module Liquid
 
   module Tag
 
-    class Include < Tag
+    class Include < Base
 
       Syntax = /(#{QuotedFragment}+)(\s+(?:with|for)\s+(#{QuotedFragment}+))?/
 

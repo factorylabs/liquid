@@ -4,8 +4,8 @@ class StandardTagTest < Test::Unit::TestCase
   include Liquid
 
   def test_tag
-    tag = Tag.new('tag', [], [])
-    assert_equal 'liquid::tag', tag.name
+    tag = Liquid::Tag::Base.new('tag', [], [])
+    assert_equal 'liquid::tag::base', tag.name
     assert_equal '', tag.render(Context.new)
   end
 

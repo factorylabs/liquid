@@ -21,20 +21,6 @@ module Liquid
     autoload :Unless,     'lib/liquid/tags/unless'
     autoload :Ifchanged,  'lib/liquid/tags/ifchanged'
     autoload :Literal,    'lib/liquid/tags/literal'
-
-    # Register Liquid base tags
-    Template.register_tags({ :assign     => Liquid::Tag::Assign,
-                             :capture    => Liquid::Tag::Capture,
-                             :case       => Liquid::Tag::Case,
-                             :comment    => Liquid::Tag::Comment,
-                             :cycle      => Liquid::Tag::Cycle,
-                             :for        => Liquid::Tag::For,
-                             :if         => Liquid::Tag::If,
-                             :ifchanged  => Liquid::Tag::Ifchanged,
-                             :include    => Liquid::Tag::Include,
-                             :literal    => Liquid::Tag::Literal,
-                             :tablerow   => Liquid::Tag::TableRow,
-                             :unless     => Liquid::Tag::Unless })
   end # Tag
 
 end # Liquid

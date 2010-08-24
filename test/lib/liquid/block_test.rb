@@ -39,7 +39,7 @@ class VariableTest < Test::Unit::TestCase
 
   def test_with_block
     template = Liquid::Template.parse("  {% comment %} {% endcomment %} ")
-    assert_equal [String, Comment, String], block_types(template.root.nodelist)
+    assert_equal [String, Liquid::Tag::Comment, String], block_types(template.root.nodelist)
     assert_equal 3, template.root.nodelist.size
   end
 

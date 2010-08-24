@@ -79,14 +79,4 @@ class TemplateTest < Test::Unit::TestCase
   ensure
     Template.tags.delete 'myliteral'
   end
-
-  def test_register_tags
-    Template.register_tags({:myliteral => Liquid::Tag::Literal, :mycomment => Liquid::Tag::Comment})
-
-    assert_include Template.tags.include?('myliteral')
-    assert_include Template.tags.include?('mycomment')
-  ensure
-    Template.tags.delete 'myliteral'
-    Template.tags.delete 'mycomment'
-  end
 end # TemplateTest
