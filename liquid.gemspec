@@ -1,10 +1,10 @@
-# -*- encoding: utf-8 -*-
+# encoding: UTF-8
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
 
   s.name        = "liquid"
-  s.version     = '2.2.3'
+  s.version     = '3.0.0.alpha'
   s.summary     = "A secure, non-evaling end user template engine with aesthetic markup."
 
   s.authors     = ["Tobias Luetke"]

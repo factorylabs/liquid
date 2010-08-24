@@ -1,3 +1,9 @@
+3.0.0.alpha / 2010-10-24
+
+* Liquid files now use autoload
+* Added release.rb
+* Removed changelog
+
 2.2.3 / 2010-08-24
 
 * Added support for comment shorthand syntax
