@@ -46,4 +46,8 @@ class RegexpTest < Test::Unit::TestCase
     assert_equal [["{% if 'gnomeslab' contains 'liquid' %}yes{% endif %}"]],
     "{{{ {% if 'gnomeslab' contains 'liquid' %}yes{% endif %} }}}".scan(LiteralShorthand)
   end
+
+  def test_literal_shorthand_regexp
+    assert_match '{# my comment goes here #}', CommentShorthand
+  end
 end # RegexpTest

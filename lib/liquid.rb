@@ -46,6 +46,7 @@ module Liquid
   TemplateParser              = /(#{PartialTemplateParser}|#{AnyStartingTag})/
   VariableParser              = /\[[^\]]+\]|#{VariableSegment}+\??/
   LiteralShorthand            = /^(?:\{\{\{\s?)(.*?)(?:\s*\}\}\})$/
+  CommentShorthand            = /^(?:\{\s?\#\s?)(.*?)(?:\s*\#\s?\})$/
 end
 
 require 'liquid/drop'
@@ -54,12 +55,12 @@ require 'liquid/errors'
 require 'liquid/strainer'
 require 'liquid/context'
 require 'liquid/tag'
-require 'liquid/block'
-require 'liquid/document'
+require 'liquid/tags/block'
+require 'liquid/tags/document'
 require 'liquid/variable'
 require 'liquid/file_system'
 require 'liquid/template'
-require 'liquid/htmltags'
+require 'liquid/tags/htmltags'
 require 'liquid/standardfilters'
 require 'liquid/condition'
 require 'liquid/module_ex'

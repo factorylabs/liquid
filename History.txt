@@ -1,3 +1,8 @@
+2.2.3 / 2010-08-24
+
+* Added support for comment shorthand syntax
+* Removed manifest file
+
 2.2.1 / 2010-08-23
 
 * Added support for literal tags

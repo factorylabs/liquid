@@ -11,8 +11,8 @@ module Liquid
     #
     # Example:
     #   Liquid::Literal "{{{ hello world }}}" #=> "{% literal %} hello world {% endliteral %}"
-    def self.from_shorthand(literal)
-      literal =~ LiteralShorthand ? "{% literal %}#{$1}{% endliteral %}" : literal
+    def self.from_shorthand(source)
+      source =~ LiteralShorthand ? "{% literal %}#{$1}{% endliteral %}" : source
     end
 
     # Public instance methods

@@ -27,6 +27,10 @@ class LiteralTagTest < Test::Unit::TestCase
     assert_template_result expected, template
   end
 
+  def test_literals_dont_remove_comments
+    assert_template_result "{# comment #}", "{{{ {# comment #} }}}"
+  end
+
   # Class methods
   def test_from_shorthand
     assert_equal '{% literal %}gnomeslab{% endliteral %}', Liquid::Literal.from_shorthand('{{{gnomeslab}}}')
