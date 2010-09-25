@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
 
   s.name        = "liquid"
-  s.version     = '2.2.4'
+  s.version     = '2.2.5.beta'
   s.summary     = "A secure, non-evaling end user template engine with aesthetic markup."
 
   s.authors     = ["Tobias Luetke"]

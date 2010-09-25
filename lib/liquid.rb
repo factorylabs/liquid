@@ -65,3 +65,7 @@ require 'liquid/module_ex'
 # Load all the tags of the standard library
 #
 Dir[File.dirname(__FILE__) + '/liquid/tags/*.rb'].each { |f| require f }
+
+# Load Liquid::Document, which until revision inherits from Block, thus is a Liquid::Tag
+# Block (aka fragment) should be a more generic concept, as discussed for Liquid 3.
+require 'liquid/document'
